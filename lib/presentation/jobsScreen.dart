@@ -97,7 +97,7 @@ class _JobScreenState extends State<JobScreen> {
               ),
               size > 850
                   ? SizedBox(
-                      width: 70,
+                      width: 30,
                     )
                   : Container(),
               Container(

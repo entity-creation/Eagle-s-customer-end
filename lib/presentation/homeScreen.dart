@@ -63,11 +63,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 size > 850
                     ? SizedBox(
-                        width: 70,
+                        width: 20,
                       )
                     : Container(),
                 Container(
-                  width: size < 850 ? 220.0 : 400.0,
+                  width: size < 850 ? 200.0 : 400.0,
                   height: 35.0,
                   margin: EdgeInsets.only(bottom: 5, top: 5),
                   child: Center(

@@ -1,6 +1,7 @@
 import 'package:eagles_customer_end/application/bottomNavigationCubit.dart';
 import 'package:eagles_customer_end/presentation/homeScreen.dart';
 import 'package:eagles_customer_end/presentation/jobsScreen.dart';
+import 'package:eagles_customer_end/presentation/messageScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,7 +29,7 @@ class _LandingPageState extends State<LandingPage> {
     HomeScreen(),
     JobScreen(),
     Container(),
-    Container(),
+    MessageScreen(),
   ];
 
   @override
@@ -54,7 +55,7 @@ class _LandingPageState extends State<LandingPage> {
                 color: Color.fromRGBO(120, 120, 120, 1),
               ),
               activeIcon: ImageIcon(
-                AssetImage("assets/homeIcon.png"),
+                AssetImage("assets/jobIcon.png"),
                 color: Color.fromRGBO(28, 45, 200, 1),
               ),
               label: "Jobs"),
@@ -64,7 +65,7 @@ class _LandingPageState extends State<LandingPage> {
                 color: Color.fromRGBO(120, 120, 120, 1),
               ),
               activeIcon: ImageIcon(
-                AssetImage("assets/homeIcon.png"),
+                AssetImage("assets/notificationIcon.png"),
                 color: Color.fromRGBO(28, 45, 200, 1),
               ),
               label: "Notifications"),
@@ -74,12 +75,12 @@ class _LandingPageState extends State<LandingPage> {
                 color: Color.fromRGBO(120, 120, 120, 1),
               ),
               activeIcon: ImageIcon(
-                AssetImage("assets/homeIcon.png"),
+                AssetImage("assets/messageIcon.png"),
                 color: Color.fromRGBO(28, 45, 200, 1),
               ),
               label: "Messages")
         ],
-        currentIndex: pageIndex,
+        currentIndex: _selectedIndex,
         onTap: _changeIndex,
       ),
     );

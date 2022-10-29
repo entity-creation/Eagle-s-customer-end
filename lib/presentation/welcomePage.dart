@@ -36,101 +36,95 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NavigationBloc, NavigationState>(
-      builder: (context, state) {
-        return Scaffold(
-            body: PageView.builder(
-                controller: controller,
-                scrollDirection: Axis.horizontal,
-                itemCount: images.length,
-                itemBuilder: (_, pageIndex) {
-                  return Container(
-                    width: double.maxFinite,
-                    height: double.maxFinite,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          "assets/" + images[pageIndex],
+    return Scaffold(
+      body: PageView.builder(
+        controller: controller,
+        scrollDirection: Axis.horizontal,
+        itemCount: images.length,
+        itemBuilder: (_, pageIndex) {
+          return Container(
+            width: double.maxFinite,
+            height: double.maxFinite,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  "assets/" + images[pageIndex],
+                ),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Container(
+              margin: EdgeInsets.only(left: 20.0, top: 670.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  WelcomeText(
+                      heading: heading[pageIndex], text: texts[pageIndex]),
+                  SizedBox(
+                    height: 16.0,
+                  ),
+                  Row(
+                    children: List.generate(3, (indexDots) {
+                      return Container(
+                        margin: EdgeInsets.only(right: 2.0),
+                        width: pageIndex == indexDots ? 25 : 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.white,
                         ),
-                        fit: BoxFit.cover,
+                      );
+                    }),
+                  ),
+                  SizedBox(
+                    height: 25.0,
+                  ),
+                  Row(
+                    children: [
+                      ResponsiveButton(
+                        buttonLabel: label[pageIndex],
+                        buttonColor: Colors.white,
+                        textColor: Colors.blue,
+                        doStuff: pageIndex == 0
+                            ? () {
+                                ScreenNavigation().nextButton(context);
+                              }
+                            : pageIndex == 1
+                                ? () {
+                                    controller.previousPage(
+                                        duration: Duration(milliseconds: 300),
+                                        curve: Curves.easeIn);
+                                  }
+                                : () {
+                                    ScreenNavigation().signupButton(context);
+                                  },
                       ),
-                    ),
-                    child: Container(
-                      margin: EdgeInsets.only(left: 20.0, top: 670.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          WelcomeText(
-                              heading: heading[pageIndex],
-                              text: texts[pageIndex]),
-                          SizedBox(
-                            height: 16.0,
-                          ),
-                          Row(
-                            children: List.generate(3, (indexDots) {
-                              return Container(
-                                margin: EdgeInsets.only(right: 2.0),
-                                width: pageIndex == indexDots ? 25 : 8,
-                                height: 8,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: Colors.white,
-                                ),
-                              );
-                            }),
-                          ),
-                          SizedBox(
-                            height: 25.0,
-                          ),
-                          Row(
-                            children: [
-                              ResponsiveButton(
-                                buttonLabel: label[pageIndex],
-                                buttonColor: Colors.white,
-                                textColor: Colors.blue,
-                                doStuff: pageIndex == 0
-                                    ? () {
-                                        ScreenNavigation().nextButton(context);
-                                      }
-                                    : pageIndex == 1
-                                        ? () {
-                                            controller.previousPage(
-                                                duration:
-                                                    Duration(milliseconds: 300),
-                                                curve: Curves.easeIn);
-                                          }
-                                        : () {
-                                            ScreenNavigation()
-                                                .signupButton(context);
-                                          },
-                              ),
-                              SizedBox(
-                                width: 70.0,
-                              ),
-                              ResponsiveButton(
-                                buttonLabel: label2[pageIndex],
-                                buttonColor: Colors.blue,
-                                textColor: Colors.white,
-                                doStuff: pageIndex + 1 != images.length
-                                    ? () {
-                                        controller.nextPage(
-                                            duration:
-                                                Duration(milliseconds: 300),
-                                            curve: Curves.easeIn);
-                                      }
-                                    : () {
-                                        ScreenNavigation().nextButton(context);
-                                        ScreenNavigation().googleForm(context);
-                                      },
-                              ),
-                            ],
-                          )
-                        ],
+                      SizedBox(
+                        width: 70.0,
                       ),
-                    ),
-                  );
-                }));
-      },
+                      ResponsiveButton(
+                        buttonLabel: label2[pageIndex],
+                        buttonColor: Colors.blue,
+                        textColor: Colors.white,
+                        doStuff: pageIndex + 1 != images.length
+                            ? () {
+                                controller.nextPage(
+                                    duration: Duration(milliseconds: 300),
+                                    curve: Curves.easeIn);
+                              }
+                            : () {
+                                ScreenNavigation().nextButton(context);
+                                ScreenNavigation().googleForm(context);
+                              },
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
